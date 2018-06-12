@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, target-densitydpi=device-dpi"/>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .input {
+            padding: 10px;
+            border: aliceblue;
+            font-size: 30px;
+        }
+
+        .btn {
+            padding: 10px;
+            background-color: blue;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<script>
+    function callNative() {
+        js2NativeUtil.jsToast("我是调用android的toast")
+    }
+
+    function intentBaidu() {
+        jsUtil.js2Native("cn.syf.nativejsdemo.TestActivity");
+    }
+
+    function login() {
+        jQuery.support.cors = true;
+        const titleUrl = 'http://AppServicesOwner.ZZCHWCCYR.com/api/User/Login';
+        $.ajax({
+            url: titleUrl,
+            headers: {
+                "content-type": 'application/json;charset=utf-8',
+                "accountId": '',
+                "token": ''
+            },
+            type:
+                "POST",
+            data:
+                {
+                    "Mobile": document.getElementById("input1").value,
+                    "Password": document.getElementById("input2").value,
+                    "AccountType": 1,
+                    "PageSize": 0,
+                    "PageIndex": 0
+                },
+            success:
+
+                function (data) {
+                    let result = JSON.parse(data);
+                    if (result.IsOk) {
+                        let item = result.Value;
+                        $("#PayeeName").html(item[0]["CONTRACT_PIC"]);
+                        $("#PayeeBank").html(item[0]["BANK_NAME"]);
+                        $("#PayeeBankAccount").html(item[0]["BANK_ACCOUNT"]);
+                        return true;
+                    } else {
+                        js2NativeUtil.jsToast(type == 1 ? "" : result.Message);
+                        return false;
+                    }
+                }
+
+            ,
+            error: function (data) {
+                js2NativeUtil.jsToast("服务器错误");
+                return false;
+            }
+        })
+        ;
+    }
+
+</script>
+<body>
+<div>
+    <button id="btn" onclick="callNative()">点我调用android</button>
+    <button id="btn1" onclick="intentBaidu()">点我调用android</button>
+    <a href="https://www.jd.com/" target="_self">打开京东</a>
+</div>
+<div>
+    <input class="input" id="input1" placeholder="请输入您的用户名">
+    <input class="input" id="input2" placeholder="请输入您的密码">
+    <button class="btn" id="btn2" onclick="login()">点我登录</button>
+</div>
+</body>
+
+</html>
