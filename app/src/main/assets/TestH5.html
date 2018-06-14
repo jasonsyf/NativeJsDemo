@@ -29,33 +29,33 @@
 
     function login() {
         jQuery.support.cors = true;
-        const titleUrl = 'http://AppServicesOwner.ZZCHWCCYR.com/api/User/Login';
         $.ajax({
-            url: titleUrl,
+            async: false,
+            url:'http://192.168.1.46:2072/api/User/Login',
             headers: {
                 "content-type": 'application/json;charset=utf-8',
-                "accountId": '',
-                "token": ''
+                // "accountId": '',
+                // "token": ''
             },
             type:
                 "POST",
             data:
-                {
+                 JSON.stringify({
                     "Mobile": document.getElementById("input1").value,
                     "Password": document.getElementById("input2").value,
                     "AccountType": 1,
                     "PageSize": 0,
                     "PageIndex": 0
-                },
+                }),
             success:
-
                 function (data) {
-                    let result = JSON.parse(data);
+                    console.log(data);
+                  //  let result = JSON.parse(data);
+                    let result = data;
                     if (result.IsOk) {
                         let item = result.Value;
-                        $("#PayeeName").html(item[0]["CONTRACT_PIC"]);
-                        $("#PayeeBank").html(item[0]["BANK_NAME"]);
-                        $("#PayeeBankAccount").html(item[0]["BANK_ACCOUNT"]);
+                        js2NativeUtil.jsToast(JSON.stringify(item));
+                        document.getElementById("textarea").value = JSON.stringify(item);
                         return true;
                     } else {
                         js2NativeUtil.jsToast(type == 1 ? "" : result.Message);
@@ -83,6 +83,8 @@
     <input class="input" id="input1" placeholder="请输入您的用户名">
     <input class="input" id="input2" placeholder="请输入您的密码">
     <button class="btn" id="btn2" onclick="login()">点我登录</button>
+    <label for="textarea"></label>
+    <textarea class="textarea" id="textarea"></textarea>
 </div>
 </body>
 

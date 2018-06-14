@@ -12,7 +12,6 @@ import android.view.KeyEvent
 import android.webkit.JsResult
 import android.webkit.WebView
 import android.webkit.WebChromeClient
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,17 +23,19 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
-        val webSettings:WebSettings=webView.settings
-        val jsUtils=JsUtils(this)
-        val js2NativeUtil=Js2NativeUtil(this)
-        webSettings.javaScriptEnabled=true
-        webSettings.javaScriptCanOpenWindowsAutomatically=true
+        val webSettings: WebSettings = webView.settings
+        val jsUtils = JsUtils(this)
+        val js2NativeUtil = Js2NativeUtil(this)
+        webSettings.javaScriptEnabled = true
+        webSettings.javaScriptCanOpenWindowsAutomatically = true
         WebView.setWebContentsDebuggingEnabled(true)
-        webView.addJavascriptInterface(jsUtils,"jsUtil")
-        webView.addJavascriptInterface(js2NativeUtil,"js2NativeUtil")
-        webView.addJavascriptInterface(js2NativeUtil,"js2NativeUtil")
-
-        webView.loadUrl("file:///android_asset/TestH5.html")
+        webView.addJavascriptInterface(jsUtils, "jsUtil")
+        webView.addJavascriptInterface(js2NativeUtil, "js2NativeUtil")
+        webView.addJavascriptInterface(js2NativeUtil, "js2NativeUtil")
+        val map = HashMap<String, String>()
+        map.put("accountId", "")
+        map.put("token", "")
+        webView.loadUrl("file:///android_asset/TestH5.html",map)
         btn1.setOnClickListener(View.OnClickListener {
             // 通过Handler发送消息
             webView.post(Runnable {
@@ -57,8 +58,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-
 
 
     }

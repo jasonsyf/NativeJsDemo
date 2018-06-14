@@ -1,6 +1,5 @@
 package cn.syf.nativejsdemo
 
-import android.content.Intent
 import android.util.Log
 import android.webkit.JavascriptInterface
 import android.widget.Toast
