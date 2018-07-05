@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         WebView.setWebContentsDebuggingEnabled(true)
         webView.addJavascriptInterface(jsUtils, "jsUtil")
         webView.addJavascriptInterface(js2NativeUtil, "js2NativeUtil")
-        webView.addJavascriptInterface(js2NativeUtil, "js2NativeUtil")
         val map = HashMap<String, String>()
         map.put("accountId", "")
         map.put("token", "")

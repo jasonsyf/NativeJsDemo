@@ -14,7 +14,20 @@
         .btn {
             padding: 10px;
             background-color: blue;
-        }
+        }.select{
+                width:200px;
+                height:30px;
+                appearance:none;
+                -moz-appearance:none;
+                -webkit-appearance:none;
+                background: url("images/select.png") no-repeat right center;
+                font-size:16px;
+                font-family:Microsoft YaHei;
+                color:red;
+            }
+
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
@@ -72,12 +85,30 @@
         ;
     }
 
+
+
 </script>
 <body>
 <div>
     <button id="btn" onclick="callNative()">点我调用android</button>
     <button id="btn1" onclick="intentBaidu()">点我调用android</button>
     <a href="https://www.jd.com/" target="_self">打开京东</a>
+    <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+    <form action="" method="post">
+        <select>
+            <option value="请选择">请选择</option>
+            <option value="北京">北京</option>
+            <option value="上海">上海</option>
+            <option value="广州">广州</option>
+        </select>
+    </form>
+
+
 </div>
 <div>
     <input class="input" id="input1" placeholder="请输入您的用户名">
