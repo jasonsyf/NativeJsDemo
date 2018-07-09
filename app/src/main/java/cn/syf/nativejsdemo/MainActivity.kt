@@ -34,13 +34,13 @@ class MainActivity : AppCompatActivity() {
         val map = HashMap<String, String>()
         map.put("accountId", "")
         map.put("token", "")
-        webView.loadUrl("file:///android_asset/TestH5.html",map)
+        webView.loadUrl("http://192.168.1.89:9527/#/orderEntry",map)
         btn1.setOnClickListener(View.OnClickListener {
             // 通过Handler发送消息
             webView.post(Runnable {
                 // 注意调用的JS方法名要对应上
                 // 调用javascript的callJS()方法
-                webView.loadUrl("javascript:intentBaidu()")
+                webView.loadUrl("javascript:moreCityClick()")
             })
 
         })
